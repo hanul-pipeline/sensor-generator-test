@@ -6,13 +6,6 @@ class KafkaProducer:
     def __init__(self, conf:dict):
         self.conf = conf
         self.producer_client = Producer(conf)
-        # print("Kafka producer created successfully.") # test
-        
-        #         threads = []
-        # threads.append(Thread(target = self.insert_measurement_to_mysql, args = (key, value, nowdate)))
-        # threads.append(Thread(target = self.define_grade, args = (topic, key, value, nowdate)))
-        # for thread in threads:
-        #     thread.start()
     
     def publish_message_thread(self, topic:str, key:str, message, partition:int=None):
         
@@ -46,5 +39,5 @@ class KafkaProducer:
 if __name__ == "__main__":
     conf = {'bootstrap.servers': 'localhost:9092'}
     producer = KafkaProducer(conf)
-    producer.publish_message_thread(topic="location_4", key="1", partition=0, message="40")
+    producer.publish_message_thread(topic="location_7", key="3", partition=0, message="66")
     
