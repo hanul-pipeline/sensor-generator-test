@@ -8,7 +8,7 @@ class KafkaProducer:
         self.producer_client = Producer(conf)
     
     def publish_message_thread(self, topic:str, key:str, message, partition:int=None):
-        
+        # define function (based on dict infos)
         def publish_message(data:dict):
             try:
                 if data["partition"] == None:
@@ -21,7 +21,10 @@ class KafkaProducer:
             except Exception as E:
                 print(E)
         
+        # add timestamp
         timestamp = int(time())
+        
+        # define dict & start thread
         try:
             data = {
                 'topic': topic,

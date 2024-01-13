@@ -3,7 +3,8 @@ import os, sys
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../lib")
 from producer_class import KafkaProducer
 from sqlite_lib import read_sensor_data
-from sensor_lib import create_single_data
+from sensor_lib import create_boolean_data_with_scenarios
+
 
 # sensor_id 정보로 partition_number 반환
 # kafka producer 생성
@@ -27,10 +28,18 @@ partition = read_sensor_data(location_id=location_id,
                              """)[0][0]
 
 # define value
-mid_value = 30
-scope = 10
-decimal = 2
+start_date = '2024-01-14_04:00'
+cnt = 300
 
-# start creating datas
-create_single_data(producer=producer, topic=topic, key=key, partition=partition, 
-                   mid_value=mid_value, scope=scope, decimal=decimal)
+# define main
+def main():
+    try:
+        create_boolean_data_with_scenarios(producer, topic, key, partition, start_date, cnt)
+    except Exception as E:
+        print(E) # <--- fix
+        print("RESTARTING SCRIPT.") # <--- fix
+        main()
+        
+if __name__ == "__main__":
+    main()
+    
