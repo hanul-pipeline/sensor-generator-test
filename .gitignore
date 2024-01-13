@@ -1,3 +1,9 @@
 
+# ini files
 **/*.ini
+
+# pycache
 **/__pycahce__
+
+# logs
+**/*.log

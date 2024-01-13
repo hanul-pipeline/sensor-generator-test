@@ -16,7 +16,6 @@ class KafkaProducer:
                 else:
                     self.producer_client.produce(topic = data['topic'], key = data['key'], value = data['message'], partition = data['partition'], timestamp=data['timestamp'])
                 self.producer_client.flush()
-                print(f'Message published successfully to topic {topic}.')
             
             except Exception as E:
                 print(E)

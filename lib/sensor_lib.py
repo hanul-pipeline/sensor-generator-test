@@ -14,12 +14,10 @@ def create_boolean_data_with_scenarios(producer, topic, key, partition, start_da
             nowdate = datetime.now().strftime("%Y-%m-%d_%H:%M")
             if nowdate == start_date:
                 index += 1
-                print(1)
                 producer.publish_message_thread(topic=topic, key=key, partition=partition, message="1")
                 if index == cnt:
                     break
             else:
-                print(0)
                 producer.publish_message_thread(topic=topic, key=key, partition=partition, message="0")
                 
             # set period as 1
@@ -50,7 +48,6 @@ def create_single_data_with_scenarios(producer, scenarios):
                 if nowdate == scenario['start_date']:
                     index += 1
                     data = str(round(uniform(scenario['mid_value']-scenario['scope'], scenario['mid_value']+scenario['scope']), scenario['decimal']) + index * scenario['amount'])
-                    print(data)
                     producer.publish_message_thread(topic=scenario['topic'], key=scenario['key'], partition=scenario['partition'], message=data)
                     
                     if index == scenario['cnt']:
@@ -59,7 +56,6 @@ def create_single_data_with_scenarios(producer, scenarios):
                 # run normal task
                 else:
                     data = str(round(uniform(scenario['mid_value']-scenario['scope'], scenario['mid_value']+scenario['scope']), scenario['decimal']))
-                    print(data)
                     producer.publish_message_thread(topic=scenario['topic'], key=scenario['key'], partition=scenario['partition'], message=data)     
                 
                 # set period as 1

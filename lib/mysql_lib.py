@@ -40,7 +40,6 @@ def update_sqlite_sensor(location_id:int):
     # get datas
     cursor.execute(f"SELECT * FROM sensor WHERE location_id = {location_id}")
     datas = cursor.fetchall()
-    print(datas)
     
     # close conn
     conn.close()
