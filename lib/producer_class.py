@@ -37,7 +37,10 @@ class KafkaProducer:
             print(f'Error appeared while publising message to topic {topic}. - {E}')
 
 if __name__ == "__main__":
-    conf = {'bootstrap.servers': 'localhost:9092'}
-    producer = KafkaProducer(conf)
-    producer.publish_message_thread(topic="location_7", key="3", partition=0, message="66")
+    pass
+    # test to write json messages
+    # import json
+    # conf = {'bootstrap.servers': 'localhost:9092'}
+    # producer = KafkaProducer(conf)
+    # producer.publish_message_thread(topic="location_7", key="3", partition=0, message=json.dumps({'value': 66, 'key': 3}).encode('utf-8'))
     
